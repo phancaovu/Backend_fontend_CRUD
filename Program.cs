@@ -13,11 +13,12 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 builder.Services.AddDbContext<UserStoreContext>(options => {
     options.UseSqlServer(builder.Configuration.GetConnectionString("UserStore"));
 });
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-//builder.Services.AddAutoMapper(typeof(Program));
+//builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddAutoMapper(typeof(Program));
 
 // Life cycle DI: AddSingleton(), AddTransient(), AddScoped()
 builder.Services.AddScoped<IUserRepository, UserRepository>();

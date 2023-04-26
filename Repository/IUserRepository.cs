@@ -1,15 +1,15 @@
-﻿using Backend.Models;
+﻿using Backend.DTO;
+using Backend.Models;
 
 namespace Backend.Repository
 {
     public interface IUserRepository
     {
-        public Task<List<User>> GetAllUserAsync();
-        public Task<User> GetUserAsync(string UserID);
+        public Task<List<UserDTO>> GetAllUserAsync();
+        public Task<UserDTO> GetUserAsync(int UserID);
 
-        public Task<User> AddUserAsync(User user);
-        public Task UpdateUserAsync(string UserID,User user);
-        public Task DeleteUserAsync(string UserID);
-        Task GetUserAsync(User newUser);
+        public Task<int> AddUserAsync(User user);
+        public Task UpdateUserAsync(int UserID,User usermodel);
+        public Task DeleteUserAsync(int UserID);
     }
 }

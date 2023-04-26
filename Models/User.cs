@@ -7,7 +7,7 @@ namespace Backend.Models
     public class User
     {
         [Key]
-        public int UserID { get; set; }
+        public int UserID { get; set; } 
         [Required]
         [MaxLength(100)]
         public string Username { get; set; } = string.Empty;

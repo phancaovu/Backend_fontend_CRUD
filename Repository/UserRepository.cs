@@ -24,9 +24,9 @@ namespace Backend.Repository
             return newUser.UserID;
         }
 
-        public async Task DeleteUserAsync(string UserID)
+        public async Task DeleteUserAsync(int UserID)
         {
-            var deleteBook = _context.Users!.SingleOrDefault(b => Equals(b.UserID, UserID));
+            var deleteBook = _context.Users!.SingleOrDefault(b => b.UserID == UserID);
             if (deleteBook != null)
             {
                 _context.Users!.Remove(deleteBook);
@@ -40,7 +40,7 @@ namespace Backend.Repository
             return _mapper.Map<List<UserDTO>>(Users);
         }
 
-        public async Task<UserDTO> GetUserAsync(string UserID)
+        public async Task<UserDTO> GetUserAsync(int UserID)
         {
             var user = await _context.Users!.FindAsync(UserID);
             return _mapper.Map<UserDTO>(user);
@@ -56,5 +56,4 @@ namespace Backend.Repository
             }
         }
     }
-      
 }
