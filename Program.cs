@@ -1,8 +1,10 @@
 using Backend.Data;
 using Backend.Repository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using MyApiNetCore6.Repositories;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,19 +12,22 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddCors(options => options.AddDefaultPolicy(policy => policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+    .AddEntityFrameworkStores<UserStoreContext>().AddDefaultTokenProviders();
 builder.Services.AddDbContext<UserStoreContext>(options => {
     options.UseSqlServer(builder.Configuration.GetConnectionString("UserStore"));
 });
-//builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 builder.Services.AddAutoMapper(typeof(Program));
 
-// Life cycle DI: AddSingleton(), AddTransient(), AddScoped()
+
 builder.Services.AddScoped<IUserRepository, UserRepository>();
-//builder.Services.AddScoped<IAccountRepository, AccountRepository>();
+builder.Services.AddScoped<IAccountRepository, AccountRepository>();
 
 builder.Services.AddAuthentication(options => {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -50,9 +55,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
-
+app.UseCors();
 app.MapControllers();
 
 app.Run();
