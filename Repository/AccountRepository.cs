@@ -7,7 +7,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace MyApiNetCore6.Repositories
+namespace Backend.Repositories
 {
     public class AccountRepository : IAccountRepository
     {

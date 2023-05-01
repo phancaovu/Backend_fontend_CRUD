@@ -1,6 +1,6 @@
 ﻿using Backend.Models;
 using Microsoft.AspNetCore.Identity;
-namespace MyApiNetCore6.Repositories
+namespace Backend.Repositories
 {
     public interface IAccountRepository
     {
