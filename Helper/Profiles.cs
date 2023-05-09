@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+﻿/*using AutoMapper;
 using Backend.DTO;
 using Backend.Models;
 
@@ -8,7 +8,7 @@ namespace Backend.Helper
     {
         public Profiles() {
             CreateMap<User, UserDTO>().ReverseMap();// map nguoc lai
-            /*
+            *//*
               CreateMap<User, UserReadDto>()
                 .ForMember(
                     dest => dest.FullName,
@@ -19,7 +19,8 @@ namespace Backend.Helper
                     );
 
             CreateMap<UserCreateDto, User>();
-             */
+             *//*
         }
     }
 }
+*/
