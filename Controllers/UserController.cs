@@ -17,6 +17,7 @@ namespace Backend.Controllers
         }
 
         [HttpGet]
+        [Route("getall")]
         public async Task<IActionResult> GetallUser()
         {
             try
@@ -29,7 +30,7 @@ namespace Backend.Controllers
                 return BadRequest();
             }
         }
-        [HttpGet("{id}")]
+        [HttpGet("search/{id}")]
         public async Task<IActionResult> GetUserByID(int id)
         {
             var user = await _userRepository.GetUserAsync(id);
@@ -50,7 +51,7 @@ namespace Backend.Controllers
                 return BadRequest();
             }
         }
-        [HttpPut("{id}")]
+        [HttpPut("update")]
         public async Task<IActionResult> UpdateUser(int id,[FromBody] User user)
         {
             if (id != user.UserID)
@@ -63,7 +64,7 @@ namespace Backend.Controllers
                 return Ok();
             }
         }
-        [HttpDelete("{id}")]
+        [HttpDelete("delete/{id}")]
         public async Task<IActionResult> DeleteUser([FromRoute] int id)
         {
             await _userRepository.DeleteUserAsync(id);

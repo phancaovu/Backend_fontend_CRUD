@@ -7,7 +7,7 @@ namespace Backend.Profiles
     public class UserProfile : Profile
     {
         public UserProfile() {
-            CreateMap<User,UserDTO>();
+            CreateMap<User,UserDTO>().ReverseMap();
         }
         /*public class MappingProfile : Profile
             {
